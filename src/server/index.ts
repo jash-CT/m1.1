@@ -18,7 +18,7 @@ app.use(helmet());
 app.use(cors({
   origin: (origin, cb) => {
     if (!origin || config.allowedOrigins.includes(origin)) return cb(null, true);
-    cb(new Error('Forbidden'));
+    if ((!origin || config.allowedOrigins.includes(origin)) && origin !== 'null') return cb(null, true);
   },
   optionsSuccessStatus: 200,
 }));
